@@ -24,4 +24,26 @@ class LivrosController extends Controller
             'livro'=>$livro
         ]);
     }
+    public function create(){
+        return view('livros.create');
+    }
+    
+    public function store(Request $request){
+        //$novoLivo = $request->all();
+       //dd ($novoLivo);
+        $novoLivro = $request->validate([
+            'titulo'=>['required', 'min:3', 'max:100'],
+            'idioma'=>['required', 'min:3', 'max:10'],
+            'total_paginas'=>['nullable', 'numeric', 'min:10'],
+            'data_edicao'=>['nullable', 'date'],
+            'isbn'=>['nullable', 'min:1', 'max:13'],
+            'observacoes'=>['nullable', 'min:1', 'max:255'],
+            'imagem_capa'=>['nullable', 'min:1', 'max:255'],
+            'id_genero'=>['nullable', 'numeric', 'min:10'],
+            'id_autor'=>['nullable', 'numeric', 'min:10'],
+            'sinopse'=>['nullable', 'min:1', 'max:255']
+        ]);
+    $livro = Livro::create($novoLivro);
+    }
+    
 }

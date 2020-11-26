@@ -13,6 +13,18 @@ class Livro extends Model
     public function genero(){
         return $this->belongsTo('App\Models\Genero','id_genero');
     }
+        protected $fillable = [
+        'titulo',
+        'idioma',
+        'total_paginas',
+        'data_edicao',
+        'isbn',
+        'observacoes',
+        'imagem_capa',
+        'id_genero',
+        'id_autor',
+        'sinopse'
+    ];
     public function autor(){
         return $this->belongsTo('App\Models\Autor','id_autor');
     }
