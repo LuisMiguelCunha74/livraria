@@ -34,9 +34,9 @@ class LivrosController extends Controller
         $novoLivro = $request->validate([
             'titulo'=>['required', 'min:3', 'max:100'],
             'idioma'=>['required', 'min:3', 'max:10'],
-            'total_paginas'=>['nullable', 'numeric', 'min:10'],
+            'total_paginas'=>['nullable', 'numeric', 'min:1'],
             'data_edicao'=>['nullable', 'date'],
-            'isbn'=>['nullable', 'min:1', 'max:13'],
+            'isbn'=>['required', 'min:13', 'max:13'],
             'observacoes'=>['nullable', 'min:1', 'max:255'],
             'imagem_capa'=>['nullable', 'min:1', 'max:255'],
             'id_genero'=>['nullable', 'numeric', 'min:10'],
@@ -44,6 +44,11 @@ class LivrosController extends Controller
             'sinopse'=>['nullable', 'min:1', 'max:255']
         ]);
     $livro = Livro::create($novoLivro);
+        return redirect()->route('livros.show', [
+            'id'=>$livro->id_livro
+        ]);
+       
+        
     }
     
 }
