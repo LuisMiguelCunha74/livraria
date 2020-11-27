@@ -39,4 +39,26 @@ class AutoresController extends Controller
             'ida'=>$autor->id_autor]);
     }
     
+        public function edit (Request $request){
+        $id = $request->id;
+        $autore = autore::where('id_autore',$id)->with(['livros'])->first();
+        //dd ($genero);
+        return view('autores.edit',[
+            'autore'=>$editora
+        ]);
+    }
+    
+    public function update (Request $request){
+        $id = $request->all();
+        $autore = Editorao::findOrFail ($id);
+        $updateAutores = $request->validate([
+        'nome'=>['required', 'min:3', 'max:100'],
+        'morada'=>['required', 'min:3', 'max:255'],
+        'observacoes'=>['required', 'min:3', 'max:255']
+        ]);
+        $autore->update($atualizar<Autore);
+        return redirect()->route('autores.show', [ 
+        'id'=>$autore->id_autore
+        ]);
+    }
 }

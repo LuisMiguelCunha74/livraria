@@ -37,4 +37,26 @@ class GenerosController extends Controller
         return redirect()->route('editoras.show', [
             'id'=>$genero->id_genero]);
     }
+    
+    public function edit (Request $request){
+        $id = $request->id;
+        $genero = genero::where('id_genero',$id)->first();
+        //dd ($genero);
+        return view('generos.edit',[
+            'genero'=>$genero
+        ]);
+    }
+    
+    public function update (Request $request){
+        $id = $request->all();
+        $genero = Genero::findOrFail ($id);
+        $updateGenero = $request->validate([
+        'designacao'=>['required', 'min:3', 'max:30'],
+        'observacoes'=>['required', 'min:3', 'max:255'],
+        ]);
+        $genero->update($atualizar<Genero);
+        return redirect()->route('generos.show', [ 
+        'id'=>$genero->id_genero
+        ]);
+    }
 }

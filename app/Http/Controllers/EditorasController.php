@@ -37,4 +37,27 @@ class EditorasController extends Controller
         return redirect()->route('editoras.show', [
             'ide'=>$editora->id_editora]);
     }
+    
+    public function edit (Request $request){
+        $id = $request->id;
+        $editora = editora::where('id_editora',$id)->with(['livros'])->first();
+        //dd ($genero);
+        return view('editoras.edit',[
+            'editora'=>$editora
+        ]);
+    }
+    
+    public function update (Request $request){
+        $id = $request->all();
+        $editora = Editorao::findOrFail ($id);
+        $updateEditora = $request->validate([
+        'nome'=>['required', 'min:3', 'max:100'],
+        'morada'=>['required', 'min:3', 'max:255'],
+        'observacoes'=>['required', 'min:3', 'max:255']
+        ]);
+        $editora->update($atualizar<Editora);
+        return redirect()->route('editoras.show', [ 
+        'id'=>$editora->id_editora
+        ]);
+    }
 }
