@@ -4,5 +4,4 @@
 @csrf
 @method('delete')
 <input type="submit" value="enviar">
-<input type="button">
 </form>

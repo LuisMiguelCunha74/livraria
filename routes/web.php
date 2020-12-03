@@ -49,6 +49,10 @@ Route::get('/autores/{id}/edit', 'App\Http\Controllers\AutoresController@edit')-
 
 Route::patch('/autores/{id}', 'App\Http\Controllers\AutoresController@update')->name('autores.update');
 
+Route::get('/autores/{id}/delete', 'App\Http\Controllers\AutoresController@delete')->name('autores.delete');
+
+Route::delete('/autores', 'App\Http\Controllers\AutoresController@destroy')->name('autores.destroy');
+
 //generos
 
 Route::get('/generos','App\Http\Controllers\GenerosController@index')
@@ -64,6 +68,10 @@ Route::post('/generos', 'App\Http\Controllers\GenerosController@store')->name('g
 Route::get('/generos/{id}/edit', 'App\Http\Controllers\GenerosController@edit')->name('generos.edit');
 
 Route::patch('/generos/{id}', 'App\Http\Controllers\GenerosController@update')->name('generos.update');
+
+Route::get('/generos/{id}/delete', 'App\Http\Controllers\GenerosController@delete')->name('generos.delete');
+
+Route::delete('/generos', 'App\Http\Controllers\GenerosController@destroy')->name('generos.destroy');
 
 //editoras
 
@@ -96,3 +104,7 @@ Route::post('/editoras', 'App\Http\Controllers\EditorasController@store')->name(
 Route::get('/editoras/{id}/edit', 'App\Http\Controllers\EditorasController@edit')->name('editoras.edit');
 
 Route::patch('/editoras/{id}', 'App\Http\Controllers\EditorasController@update')->name('editoras.update');
+
+Route::get('/editoras/{id}/delete', 'App\Http\Controllers\EditorasController@delete')->name('editoras.delete');
+
+Route::delete('/editoras', 'App\Http\Controllers\EditorasController@destroy')->name('editoras.destroy');

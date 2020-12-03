@@ -61,4 +61,21 @@ class AutoresController extends Controller
         'id'=>$autore->id_autore
         ]);
     }
+    
+         public function delete (Request $request){
+        $autor = Autor::where ('id_autor', $request->id )->first();
+        if(is_null($autor)){
+            return redirect()->route('autor.index')->with('mensagem','o autor nao existe');
+        }
+        else
+        {
+            return view('autores.delete',['autor'=>$autor]);
+        }
+    }
+    public function destroy(Request $request){
+        $idAutor = $request->id;
+        $autor = Autor::findOrFail($idAutor);
+        $autor->delete();
+        return redirect()->route('autores.index')->with('mensagem','autor eleminado!');
+    }
 }

@@ -25,8 +25,14 @@ Observações: <input type="text" name="observacoes" value="{{old('observacoes')
     devera indicar um observacoes correto<br>
     @endif
 Imagem capa: <input type="text" name="imagem_capa" value="{{old('imagem_capa')}}"><br>
-     @if ( $errors->has('imagem_capa'))
-    devera indicar uma imagem_capa correto<br>
+    <select name="id_genero">
+        @foreach($generos as $genero)
+            <option value="{{$genero->id_genero}}">{{$genero->designacao}}</option>
+        @endforeach
+    </select>
+    
+    @if ( $errors->has('imagem_capa'))
+        devera indicar uma imagem_capa correto<br>
     @endif
 Género: <input type="text" name="id_genero" value="{{old('id_genero')}}"><br>
      @if ( $errors->has('id_genero'))

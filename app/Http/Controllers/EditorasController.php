@@ -49,7 +49,7 @@ class EditorasController extends Controller
     
     public function update (Request $request){
         $id = $request->all();
-        $editora = Editorao::findOrFail ($id);
+        $editora = Editora::findOrFail ($id);
         $updateEditora = $request->validate([
         'nome'=>['required', 'min:3', 'max:100'],
         'morada'=>['required', 'min:3', 'max:255'],
@@ -59,5 +59,22 @@ class EditorasController extends Controller
         return redirect()->route('editoras.show', [ 
         'id'=>$editora->id_editora
         ]);
+    }
+    
+     public function delete (Request $request){
+        $editora = Editora::where ('id_editora', $request->id )->first();
+        if(is_null($editora)){
+            return redirect()->route('editoras.index')->with('mensagem','A editora nao existe');
+        }
+        else
+        {
+            return view('editoras.delete',['editora'=>$editora]);
+        }
+    }
+    public function destroy(Request $request){
+        $idEditora = $request->id;
+        $editora = Editora::findOrFail($idEditora);
+        $editora->delete();
+        return redirect()->route('editoras.index')->with('mensagem','editora eleminado!');
     }
 }

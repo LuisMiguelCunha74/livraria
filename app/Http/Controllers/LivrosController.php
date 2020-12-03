@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Livro;
+use App\Models\Genero;
 
 class LivrosController extends Controller
 {
@@ -25,7 +26,10 @@ class LivrosController extends Controller
         ]);
     }
     public function create(){
-        return view('livros.create');
+               $generos = Genero::all();
+        return view('livros.create',[
+            'generos'=>$generos
+        ]);
     }
     
     public function store(Request $request){
@@ -53,14 +57,18 @@ class LivrosController extends Controller
     
     public function edit (Request $request){
         $id = $request->id;
+        $generos = Genero::all();
         $livro = livro::where('id_livro',$id)->with(['genero','autores','editoras'])->first();
         return view('livros.edit',[
-            'livro'=>$livro
+            'livro'=>$livro,
+            'generos'=>$generos
         ]);
+        
+
     }
     
     public function update (Request $request){
-        $id = $request->all();
+        $id = $request->id;
         $livro = Livro::findOrFail ($id);
         $updateLivro = $request->validate([
             'titulo'=>['required', 'min:3', 'max:100'],
@@ -71,7 +79,6 @@ class LivrosController extends Controller
             'observacoes'=>['nullable', 'min:1', 'max:255'],
             'imagem_capa'=>['nullable', 'min:1', 'max:255'],
             'id_genero'=>['nullable', 'numeric', 'min:10'],
-            'id_autor'=>['nullable', 'numeric', 'min:10'],
             'sinopse'=>['nullable', 'min:1', 'max:255']
         ]);
         $livro->update($atualizarLivro);
