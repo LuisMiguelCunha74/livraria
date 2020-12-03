@@ -1,6 +1,5 @@
 <form action="{{route('livros.update',['id'=>$livro->id_livro])}}" method="post">
 @method('patch')    
-
 @csrf
 Titulo: <input type="text" name="titulo" value="{{$livro->titulo}}"><br>
     @if ( $errors->has('titulo'))
