@@ -40,15 +40,29 @@ Género:
     @endif
     </select>
     <br>
-Autor: <input type="text" name="id_autor" value="{{$livro->id_autor}}"><br>
-     @if ( $errors->has('id_autor'))
-    devera indicar um is_autor correto<br>
+Autor:
+         <select name="id_autor[]" multiple="multiple">
+            @foreach ($autores as $autor)
+                <option value="{{$autor->id_autor}}" @if(in_array($autor->id_autor, $autoresLivro))selected @endif>
+                {{$autor->nome}}
+                </option>
+            @endforeach
+        </select>
+        <br>
+    @if ( $errors->has('id_autor'))
+        devera indicar um is_autor correto<br>
     @endif
-Sinopse: <input type="text" name="sinpse" value="{{$livro->sinopse}}"><br>
+Sinopse: <input type="text" name="sinopse" value="{{$livro->sinopse}}"><br>
     @if ( $errors->has('sinopse'))
     devera indicar um sinopse correto<br>
     @endif
-<input type="submit" value="enviar">
-    
-   
+
+Editora: 
+   <select name="id_editora[]" multiple="multiple">
+        @foreach($editoras as $editora)
+            <option value="{{$editora->id_editora}}"@if(in_array($editora->id_editora, $editorasLivro))selected @endif>{{$editora->nome}}</option>
+        @endforeach
+    </select>   
+    <br>
+    <input type="submit" value="enviar">
 </form>

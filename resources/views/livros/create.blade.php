@@ -38,7 +38,13 @@ Género: <input type="text" name="id_genero" value="{{old('id_genero')}}"><br>
      @if ( $errors->has('id_genero'))
     devera indicar um id_genero<br>
     @endif
-Autor: <input type="text" name="id_autor" value="{{old('id_autor')}}"><br>
+Autor: <select name="id_autor[]" multiple="multiple">
+            @foreach ($autores as $autor)
+                <option value="{{$autor->id_autor}}">
+                {{$autor->nome}}</option>
+            @endforeach
+        </select>
+<br>
      @if ( $errors->has('id_autor'))
     devera indicar um is_autor correto<br>
     @endif
@@ -47,6 +53,10 @@ Sinopse: <input type="text" name="sinpse" value="{{old('sinopse')}}"><br>
     devera indicar um sinopse correto<br>
     @endif
 <input type="submit" value="enviar">
-    
-   
+Editora:
+   <select name="id_editora[]" multiple="multiple">
+        @foreach($editoras as $editora)
+            <option value="{{$editora->id_editora}}">{{$editora->nome}}</option>
+        @endforeach
+    </select>
 </form>

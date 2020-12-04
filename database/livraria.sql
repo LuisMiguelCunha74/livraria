@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 26-Nov-2020 às 10:04
+-- Generation Time: 04-Dez-2020 às 18:18
 -- Versão do servidor: 10.1.38-MariaDB
 -- versão do PHP: 7.3.2
 
@@ -72,6 +72,32 @@ CREATE TABLE `autores_livros` (
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Extraindo dados da tabela `autores_livros`
+--
+
+INSERT INTO `autores_livros` (`id_al`, `id_autor`, `id_livro`, `updated_at`, `created_at`) VALUES
+(1, 10, 16, '2020-12-04 15:07:04', '2020-12-04 15:07:04'),
+(2, 12, 16, '2020-12-04 15:07:04', '2020-12-04 15:07:04'),
+(3, 13, 16, '2020-12-04 15:07:04', '2020-12-04 15:07:04'),
+(4, 1, 17, '2020-12-04 15:17:03', '2020-12-04 15:17:03'),
+(5, 2, 17, '2020-12-04 15:17:03', '2020-12-04 15:17:03'),
+(6, 3, 17, '2020-12-04 15:17:03', '2020-12-04 15:17:03'),
+(7, 4, 17, '2020-12-04 15:17:03', '2020-12-04 15:17:03'),
+(8, 5, 17, '2020-12-04 15:17:03', '2020-12-04 15:17:03'),
+(9, 6, 17, '2020-12-04 15:17:03', '2020-12-04 15:17:03'),
+(10, 7, 17, '2020-12-04 15:17:03', '2020-12-04 15:17:03'),
+(11, 8, 17, '2020-12-04 15:17:03', '2020-12-04 15:17:03'),
+(12, 9, 17, '2020-12-04 15:17:03', '2020-12-04 15:17:03'),
+(13, 10, 17, '2020-12-04 15:17:03', '2020-12-04 15:17:03'),
+(14, 11, 17, '2020-12-04 15:17:03', '2020-12-04 15:17:03'),
+(15, 12, 17, '2020-12-04 15:17:03', '2020-12-04 15:17:03'),
+(16, 13, 17, '2020-12-04 15:17:03', '2020-12-04 15:17:03'),
+(18, 2, 11, '2020-12-04 16:01:10', '2020-12-04 16:01:10'),
+(19, 1, 4, '2020-12-04 16:48:09', '2020-12-04 16:48:09'),
+(23, 3, 10, '2020-12-04 16:57:39', '2020-12-04 16:57:39'),
+(25, 2, 19, '2020-12-04 17:14:30', '2020-12-04 17:14:30');
+
 -- --------------------------------------------------------
 
 --
@@ -133,6 +159,13 @@ CREATE TABLE `editoras_livros` (
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Extraindo dados da tabela `editoras_livros`
+--
+
+INSERT INTO `editoras_livros` (`id_editora`, `id_livro`, `titulo`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(3, 19, NULL, '2020-12-04 17:14:30', '2020-12-04 17:14:30', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -190,7 +223,7 @@ INSERT INTO `livros` (`id_livro`, `titulo`, `idioma`, `total_paginas`, `data_edi
 (1, 'sistema de informação de apoio a gestão', 'Portugês', NULL, NULL, '9728589433', NULL, NULL, 1, 1, NULL, NULL, NULL, NULL),
 (2, 'cidades e regiões digitais:impacte na cidade e nas pessoas', 'Portugês', NULL, NULL, '9728830033', NULL, NULL, 2, 1, NULL, NULL, NULL, NULL),
 (3, 'Informatica e Competencias Tecnologicas para a Sociedade da Informação', 'Portugês', NULL, NULL, '9789728830304', NULL, NULL, 1, 3, NULL, NULL, NULL, NULL),
-(4, 'Readings in Information Society', 'Inglês', NULL, NULL, '9789727228997', NULL, NULL, 3, 5, NULL, NULL, NULL, NULL),
+(4, 'Readings in Information Society', 'Inglês', NULL, NULL, '9789727228997', NULL, NULL, 2, 5, NULL, NULL, '2020-12-04 16:48:09', NULL),
 (5, 'Sociedade da Informação: balanço e implicações ', 'Português', NULL, NULL, '9789728830182', NULL, NULL, 3, 7, NULL, NULL, NULL, NULL),
 (6, 'O Tribunal de Contas e as Autarquias Locais', 'Portugês', NULL, NULL, '9789899936614', NULL, NULL, 2, 7, NULL, NULL, NULL, NULL),
 (7, 'Informática e Competências Tecnológicas para a Sociedade da Informação 2ed', 'Português', NULL, NULL, '9789728830304', NULL, NULL, 2, 8, NULL, NULL, NULL, NULL),
@@ -201,7 +234,7 @@ INSERT INTO `livros` (`id_livro`, `titulo`, `idioma`, `total_paginas`, `data_edi
 (12, 'Repensar a Sociedade da Informação e do Conhecimento no Início do Século XXI', 'Português', NULL, NULL, '9789726186953', NULL, NULL, 3, 4, NULL, NULL, NULL, NULL),
 (13, 'Gestão da Informação em Museus: uma contribuição para o seu estudo', 'Português', NULL, NULL, '9789899901394', NULL, NULL, 2, 4, NULL, NULL, NULL, NULL),
 (14, 'Web 2.0 and Higher Education. A psychological perspective', 'Inglês', NULL, NULL, '9783659683466', NULL, NULL, 1, 1, NULL, NULL, NULL, NULL),
-(15, 'Contribuições para a discussão de um modelo de Governo Eletrónico Local para Angola', 'Português', NULL, NULL, '9789899933200', NULL, NULL, 1, 13, NULL, NULL, NULL, NULL);
+(19, 'ABCDW', 'Portugues', NULL, NULL, '1234567891234', NULL, NULL, 1, NULL, NULL, '2020-12-04 17:14:30', '2020-12-04 17:15:58', NULL);
 
 --
 -- Indexes for dumped tables
@@ -257,7 +290,7 @@ ALTER TABLE `autores`
 -- AUTO_INCREMENT for table `autores_livros`
 --
 ALTER TABLE `autores_livros`
-  MODIFY `id_al` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_al` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `editoras`
@@ -275,7 +308,7 @@ ALTER TABLE `generos`
 -- AUTO_INCREMENT for table `livros`
 --
 ALTER TABLE `livros`
-  MODIFY `id_livro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_livro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
