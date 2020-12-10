@@ -13,4 +13,7 @@ Livraria
 </li>
 @endforeach
 </ul>
+@if(auth()->check())
+<a href="{{route('livros.create')}}">Adicionar Livros Novos</a>
+@endif
 @endsection

@@ -24,8 +24,25 @@
       <a class="nav-item nav-link" href="{{route('generos.index')}}">Generos</a>
       <a class="nav-item nav-link" href="{{route('editoras.index')}}">Editoras</a>
       <a class="nav-item nav-link" href="{{route('autores.index')}}">Autores</a>
-    </div>
+      <a class="nav-item nav-link" href="{{route('login')}}">Login</a>
+      <a class="nav-item nav-link" href="{{route('register')}}">Register</a>
+         @if(auth()->check())
+        <a class="dropdown-item" href="{{ route('logout') }}"
+            onclick="event.preventDefault();
+            document.getElementById('logout-form').submit();">
+                   {{ __('Logout') }}
+      </a>
 
+      <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                 @csrf
+      </form>
+        @endif
+    </div>
+        @if(auth()->check())
+            {{Auth::user()->id}}<br>
+            {{Auth::user()->email}}<br>
+            {{Auth::user()->name}}<br>
+        @endif
 </nav>
 </body>
 </html>

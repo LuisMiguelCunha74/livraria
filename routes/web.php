@@ -20,15 +20,15 @@ Route::get('/livros','App\Http\Controllers\LivrosController@index')
 Route::get('/livros/{id}/show','App\Http\Controllers\LivrosController@show')
     ->name('livros.show');
 
-Route::get('/livros/create', 'App\Http\Controllers\LivrosController@create')->name('livros.create');
+Route::get('/livros/create', 'App\Http\Controllers\LivrosController@create')->name('livros.create')->middleware('auth');
 
-Route::post('/livros', 'App\Http\Controllers\LivrosController@store')->name('livros.store');
+Route::post('/livros', 'App\Http\Controllers\LivrosController@store')->name('livros.store')->middleware('auth');
 
 Route::get('/livros/{id}/edit', 'App\Http\Controllers\LivrosController@edit')->name('livros.edit');
 
-Route::patch('/livros/{id}', 'App\Http\Controllers\LivrosController@update')->name('livros.update');
+Route::patch('/livros/{id}', 'App\Http\Controllers\LivrosController@update')->name('livros.update')->middleware('auth');
 
-Route::get('/livros/{id}/delete', 'App\Http\Controllers\LivrosController@delete')->name('livros.delete');
+Route::get('/livros/{id}/delete', 'App\Http\Controllers\LivrosController@delete')->name('livros.delete')->middleware('auth');
 
 Route::delete('/livros', 'App\Http\Controllers\LivrosController@destroy')->name('livros.destroy');
 
@@ -108,3 +108,10 @@ Route::patch('/editoras/{id}', 'App\Http\Controllers\EditorasController@update')
 Route::get('/editoras/{id}/delete', 'App\Http\Controllers\EditorasController@delete')->name('editoras.delete');
 
 Route::delete('/editoras', 'App\Http\Controllers\EditorasController@destroy')->name('editoras.destroy');
+Auth::routes();
+
+
+//login home etc
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
