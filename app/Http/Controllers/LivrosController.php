@@ -86,16 +86,16 @@ class LivrosController extends Controller
         foreach($livro->editoras as $editora){
             $editorasLivro[]=$editora->id_editora;
         }
-
-        return view('livros.edit',[
-            'livro'=>$livro,
-            'generos'=>$generos,
-            'autores'=>$autores,
-            'autoresLivro'=>$autoresLivros,
-            'editoras'=>$editoras,
-            'editorasLivro'=>$editorasLivro
-        ]);
-        
+        if(isset($livro->user->id_user))
+        if(auth()->user()->id == $livro->id_user){
+            return view('livros.edit', ['livro'=>$livro, 'generos' =>$genero, 'autores'=>$autores, 'autoresLivro'=>$autoresLivros, 'editoras'=>$editoras, 'editorasLivro'=>$editorasLivro]);
+        }
+        else{
+            return view('index');
+        }
+        else{ 
+            return view('livros.edit',['livro'=>$livro, 'generos'=>$generos, 'autores'=>$autores, 'autoresLivro'=>$autoresLivros, 'editoras'=>$editoras, 'editorasLivro'=>$editorasLivro]);
+            }
 
     }
     
@@ -116,8 +116,10 @@ class LivrosController extends Controller
         ]);
         // dd($updateLivro);
         $autores=$request->id_autor;
+        $editoras=$request->id_editora;
         $livro->update($updateLivro);
         $livro->autores()->sync($autores);
+        $livro->editoras()->sync($editoras);
         return redirect()->route('livros.show', [ 
         'id'=>$livro->id_livro
         ]);

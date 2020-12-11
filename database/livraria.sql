@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 10-Dez-2020 às 16:24
+-- Generation Time: 11-Dez-2020 às 18:12
 -- Versão do servidor: 10.1.38-MariaDB
 -- versão do PHP: 7.3.2
 
@@ -96,7 +96,8 @@ INSERT INTO `autores_livros` (`id_al`, `id_autor`, `id_livro`, `updated_at`, `cr
 (18, 2, 11, '2020-12-04 16:01:10', '2020-12-04 16:01:10'),
 (19, 1, 4, '2020-12-04 16:48:09', '2020-12-04 16:48:09'),
 (23, 3, 10, '2020-12-04 16:57:39', '2020-12-04 16:57:39'),
-(25, 2, 19, '2020-12-04 17:14:30', '2020-12-04 17:14:30');
+(25, 2, 19, '2020-12-04 17:14:30', '2020-12-04 17:14:30'),
+(30, 1, 20, '2020-12-11 17:11:14', '2020-12-11 17:11:14');
 
 -- --------------------------------------------------------
 
@@ -164,7 +165,8 @@ CREATE TABLE `editoras_livros` (
 --
 
 INSERT INTO `editoras_livros` (`id_editora`, `id_livro`, `titulo`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(3, 19, NULL, '2020-12-04 17:14:30', '2020-12-04 17:14:30', NULL);
+(3, 19, NULL, '2020-12-04 17:14:30', '2020-12-04 17:14:30', NULL),
+(1, 20, NULL, '2020-12-11 15:58:26', '2020-12-11 15:58:26', NULL);
 
 -- --------------------------------------------------------
 
@@ -235,7 +237,8 @@ INSERT INTO `livros` (`id_livro`, `titulo`, `idioma`, `total_paginas`, `data_edi
 (12, 'Repensar a Sociedade da Informação e do Conhecimento no Início do Século XXI', 'Português', NULL, NULL, '9789726186953', NULL, NULL, 3, 4, NULL, NULL, NULL, NULL, 0),
 (13, 'Gestão da Informação em Museus: uma contribuição para o seu estudo', 'Português', NULL, NULL, '9789899901394', NULL, NULL, 2, 4, NULL, NULL, NULL, NULL, 0),
 (14, 'Web 2.0 and Higher Education. A psychological perspective', 'Inglês', NULL, NULL, '9783659683466', NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, 0),
-(19, 'ABCDW', 'Portugues', NULL, NULL, '1234567891234', NULL, NULL, 1, NULL, NULL, '2020-12-04 17:14:30', '2020-12-04 17:15:58', NULL, 0);
+(19, 'ABCDW', 'Portugues', NULL, NULL, '1234567891234', NULL, NULL, 1, NULL, NULL, '2020-12-04 17:14:30', '2020-12-04 17:15:58', NULL, 0),
+(20, '荷兰教皇', 'chines', 150, NULL, '1234567891234', NULL, NULL, 1, NULL, NULL, '2020-12-11 15:07:39', '2020-12-11 15:14:48', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -259,7 +262,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'hsjs', '123wsad@asdasdas.com', NULL, '$2y$10$H7Pa5AAyU/kkkbwKqrAj1.ZVtVMCdVSmPfol63c4sEbvEm.po73gq', NULL, '2020-12-10 13:55:19', '2020-12-10 13:55:19');
+(1, 'Luis', '123wsad@asdasdas.com', NULL, '$2y$10$H7Pa5AAyU/kkkbwKqrAj1.ZVtVMCdVSmPfol63c4sEbvEm.po73gq', NULL, '2020-12-10 13:55:19', '2020-12-10 13:55:19');
 
 --
 -- Indexes for dumped tables
@@ -321,7 +324,7 @@ ALTER TABLE `autores`
 -- AUTO_INCREMENT for table `autores_livros`
 --
 ALTER TABLE `autores_livros`
-  MODIFY `id_al` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id_al` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `editoras`
@@ -339,7 +342,7 @@ ALTER TABLE `generos`
 -- AUTO_INCREMENT for table `livros`
 --
 ALTER TABLE `livros`
-  MODIFY `id_livro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id_livro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `users`

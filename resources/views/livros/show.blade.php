@@ -8,7 +8,9 @@ Data Edição:{{$livro->data_edicao}}<br>
 Total paginas:{{$livro->total_paginas}}<br>
 Observações:{{$livro->observacoes}}<br>
 Imagem Capa:{{$livro->imagem_capa}}<br>
-
+@if(($livro->id_user!=0))
+Add:{{$livro->user->name}}<br> 
+@endif    
 @if(count($livro->editoras)>0)
         @foreach($livro->editoras as $editora)
         Editora:{{$editora->nome}}<br>
@@ -43,12 +45,14 @@ Updated_at:{{$livro->updated_at}}<br>
 Deleted_at:{{$livro->deleted_at}}
 </ul>
 @if(auth()->check())
-<a class="btn btn-primary" href="{{route('livros.edit', ['id'=>$livro->id_livro])}}">
-editar
-</a>
+    @if(auth()->user()->id == $livro->id_user)
+        <a class="btn btn-primary" href="{{route('livros.edit', ['id'=>$livro->id_livro])}}">
+            editar
+        </a>
 
-<a class="btn btn-primary" href="{{route('livros.delete', ['id'=>$livro->id_livro])}}">
-    excluir
-</a>
+        <a class="btn btn-primary" href="{{route('livros.delete', ['id'=>$livro->id_livro])}}">
+            excluir
+        </a>
+    @endif
 @endif
 
