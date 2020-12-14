@@ -108,10 +108,10 @@ Route::patch('/editoras/{id}', 'App\Http\Controllers\EditorasController@update')
 Route::get('/editoras/{id}/delete', 'App\Http\Controllers\EditorasController@delete')->name('editoras.delete');
 
 Route::delete('/editoras', 'App\Http\Controllers\EditorasController@destroy')->name('editoras.destroy');
+
 Auth::routes();
 
-
-//login home etc
+//login home comentario etc
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-
+Route::post('/comentario', ['App\Http\Controllers\LivrosController@comentarios'])->name('comentarios.store');

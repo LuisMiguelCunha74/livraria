@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 11-Dez-2020 às 18:12
+-- Generation Time: 14-Dez-2020 às 17:27
 -- Versão do servidor: 10.1.38-MariaDB
 -- versão do PHP: 7.3.2
 
@@ -98,6 +98,23 @@ INSERT INTO `autores_livros` (`id_al`, `id_autor`, `id_livro`, `updated_at`, `cr
 (23, 3, 10, '2020-12-04 16:57:39', '2020-12-04 16:57:39'),
 (25, 2, 19, '2020-12-04 17:14:30', '2020-12-04 17:14:30'),
 (30, 1, 20, '2020-12-11 17:11:14', '2020-12-11 17:11:14');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `comentarios`
+--
+
+CREATE TABLE `comentarios` (
+  `id_livro` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `comentario` varchar(250) NOT NULL,
+  `aprovado` int(11) NOT NULL,
+  `id_comentarios` int(11) NOT NULL,
+  `created_at` int(11) NOT NULL,
+  `updated_at` int(11) NOT NULL,
+  `deleted_at` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -279,6 +296,13 @@ ALTER TABLE `autores`
 --
 ALTER TABLE `autores_livros`
   ADD PRIMARY KEY (`id_al`);
+
+--
+-- Indexes for table `comentarios`
+--
+ALTER TABLE `comentarios`
+  ADD PRIMARY KEY (`id_comentarios`),
+  ADD UNIQUE KEY `id_livro` (`id_livro`,`id_user`);
 
 --
 -- Indexes for table `edicoes`

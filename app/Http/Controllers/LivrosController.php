@@ -150,4 +150,13 @@ class LivrosController extends Controller
             return redirect()->route('livros.index');
         }
     }
+    
+    public function comentarios(Request $request){
+        $idlivro = $request->id;
+        $livro = Livro::findOrfail($request->id)->livros;
+        $comentario = $request->validate([
+            'comentario'=>['required', 'min:3', 'max:200'] 
+        ]);
+            
+    }
 }
