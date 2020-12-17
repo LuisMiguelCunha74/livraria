@@ -56,10 +56,4 @@ Deleted_at:{{$livro->deleted_at}}
     @endif
 @endif
 
-<form action="{{route('comentario.store', ['id'])}}">
-    Comentario: <br>
-    <textarea name="comentario"></textarea>{{old('comentario')}}<br>
-    <input type="submit" value="enviar">
     
-</form>
-

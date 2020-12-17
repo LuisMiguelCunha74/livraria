@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use App\Models\Livro;
 use App\Models\Genero;
 use App\Models\Autor;
@@ -37,6 +38,7 @@ class LivrosController extends Controller
             'autores'=>$autores,
             'editoras'=>$editoras
         ]);
+        
     }
     
     public function store(Request $request){
@@ -58,6 +60,7 @@ class LivrosController extends Controller
                $userAtual = Auth::user()->id;
                $novoLivro['id_user']=$userAtual;
            }
+        if (Gate::allows('admin')){
         $autores = $request->id_autor;
         $editoras=$request->id_editora;
         $livro = Livro::create($novoLivro); 
@@ -66,7 +69,7 @@ class LivrosController extends Controller
         return redirect()->route('livros.show', [
             'id'=>$livro->id_livro
         ]);
-     
+        }
        
         
     }
@@ -86,6 +89,7 @@ class LivrosController extends Controller
         foreach($livro->editoras as $editora){
             $editorasLivro[]=$editora->id_editora;
         }
+        if(Gate::allows('atualizar-livro',$livro)||Gate::allows('admin')){
         if(isset($livro->user->id_user))
         if(auth()->user()->id == $livro->id_user){
             return view('livros.edit', ['livro'=>$livro, 'generos' =>$genero, 'autores'=>$autores, 'autoresLivro'=>$autoresLivros, 'editoras'=>$editoras, 'editorasLivro'=>$editorasLivro]);
@@ -96,7 +100,11 @@ class LivrosController extends Controller
         else{ 
             return view('livros.edit',['livro'=>$livro, 'generos'=>$generos, 'autores'=>$autores, 'autoresLivro'=>$autoresLivros, 'editoras'=>$editoras, 'editorasLivro'=>$editorasLivro]);
             }
-
+            }
+            else{
+                return redirect()->route(livros.index)->with('mensagem','Nao tem premissao para aceder a area protegida');
+            }
+                    
     }
     
     public function update (Request $request){
@@ -115,6 +123,7 @@ class LivrosController extends Controller
             'sinopse'=>['nullable', 'min:1', 'max:255']
         ]);
         // dd($updateLivro);
+        if (Gate::allows('admin')){
         $autores=$request->id_autor;
         $editoras=$request->id_editora;
         $livro->update($updateLivro);
@@ -123,7 +132,10 @@ class LivrosController extends Controller
         return redirect()->route('livros.show', [ 
         'id'=>$livro->id_livro
         ]);
+        }
     }
+        
+    
 
     
     public function delete (Request $request){

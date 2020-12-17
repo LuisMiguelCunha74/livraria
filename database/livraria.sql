@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 14-Dez-2020 às 17:27
+-- Generation Time: 17-Dez-2020 às 16:23
 -- Versão do servidor: 10.1.38-MariaDB
 -- versão do PHP: 7.3.2
 
@@ -269,6 +269,7 @@ CREATE TABLE `users` (
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tipo_user` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'normal' COMMENT 'admin ou normal',
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -278,8 +279,9 @@ CREATE TABLE `users` (
 -- Extraindo dados da tabela `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Luis', '123wsad@asdasdas.com', NULL, '$2y$10$H7Pa5AAyU/kkkbwKqrAj1.ZVtVMCdVSmPfol63c4sEbvEm.po73gq', NULL, '2020-12-10 13:55:19', '2020-12-10 13:55:19');
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `tipo_user`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Luis', '123wsad@asdasdas.com', NULL, '$2y$10$H7Pa5AAyU/kkkbwKqrAj1.ZVtVMCdVSmPfol63c4sEbvEm.po73gq', 'normal', NULL, '2020-12-10 13:55:19', '2020-12-10 13:55:19'),
+(2, 'Atum Gamer', 'AtumGamer@gmail.com', NULL, '$2y$10$lBS6zkjt779RPyXn9Yg7k.hPWR/cpY9REOoI5bLWfTNasv45Lhg2K', 'normal', NULL, '2020-12-17 15:17:31', '2020-12-17 15:17:31');
 
 --
 -- Indexes for dumped tables
@@ -372,7 +374,7 @@ ALTER TABLE `livros`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

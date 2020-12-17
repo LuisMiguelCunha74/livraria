@@ -114,4 +114,4 @@ Auth::routes();
 //login home comentario etc
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::post('/comentario', ['App\Http\Controllers\LivrosController@comentarios'])->name('comentarios.store');
+//Route::post('/comentario', ['App\Http\Controllers\LivrosController@comentarios'])->name('comentarios.store');
