@@ -21,35 +21,53 @@ class AutoresController extends Controller
         //$autores=Autor::findOrFail($idAutores);
         //$autores=Autor::find($idAutores);
         $autores=Autor::where('id_autor',$idAutores)->with('livros')->first();
+        
         return view('autores.show',[
             'autores'=>$autores
         ]);
     }
-        public function create(){
-        return view('autores.create');
+    public function create(){
+        if (Gate::allows('admin')){
+           return view('autores.create');
+        }
+        else{
+            return redirect()->route('livros.index')->with('mensagem','Nao tem permissão para aceder a area pretendida');
+        }
+        
     }
     public function store(Request $request){
-        $novoAutor = $request->validate([
+        if (Gate::allows('admin')){
+            $novoAutor = $request->validate([
         'nome'=>['required', 'min:3', 'max:100'],
         'nacionalidade'=>['required', 'min:3', 'max:20'],
         'data_nascimento'=>['nullable', 'date'],
         'fotografia'=>['nullable', 'min:3', 'max:255']
         ]);
-         $autor = Autor::create($novoAutor);
-        return redirect()->route('autores.show', [
+            $autor = Autor::create($novoAutor);
+            return redirect()->route('autores.show', [
             'ida'=>$autor->id_autor]);
+        }
+        else{
+            return redirect()->route('livros.index')->with('mensagem','Nao tem permissão para aceder a area pretendida');
+        }
     }
     
-        public function edit (Request $request){
+    public function edit (Request $request){
+        if (Gate::allows('admin')){
         $id = $request->id;
         $autore = autore::where('id_autore',$id)->with(['livros'])->first();
         //dd ($genero);
         return view('autores.edit',[
             'autore'=>$editora
         ]);
+        }
+        else{
+            return redirect()->route('livros.index')->with('mensagem','Nao tem permissão para aceder a area pretendida');
+        }
     }
     
     public function update (Request $request){
+        if (Gate::allows('admin')){
         $id = $request->all();
         $autore = Editorao::findOrFail ($id);
         $updateAutores = $request->validate([
@@ -61,10 +79,15 @@ class AutoresController extends Controller
         return redirect()->route('autores.show', [ 
         'id'=>$autore->id_autore
         ]);
+            }
+        else{
+            return redirect()->route('livros.index')->with('mensagem','Nao tem permissão para aceder a area pretendida');
+        }
     }
     
          public function delete (Request $request){
-        $autor = Autor::where ('id_autor', $request->id )->first();
+        if (Gate::allows('admin')){
+             $autor = Autor::where ('id_autor', $request->id )->first();
         if(is_null($autor)){
             return redirect()->route('autor.index')->with('mensagem','o autor nao existe');
         }
@@ -72,11 +95,20 @@ class AutoresController extends Controller
         {
             return view('autores.delete',['autor'=>$autor]);
         }
+            }
+        else{
+            return redirect()->route('livros.index')->with('mensagem','Nao tem permissão para aceder a area pretendida');
+        }
     }
     public function destroy(Request $request){
+        if (Gate::allows('admin')){
         $idAutor = $request->id;
         $autor = Autor::findOrFail($idAutor);
         $autor->delete();
         return redirect()->route('autores.index')->with('mensagem','autor eleminado!');
+             }
+        else{
+            return redirect()->route('livros.index')->with('mensagem','Nao tem permissão para aceder a area pretendida');
+        }
     }
 }
