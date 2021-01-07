@@ -52,15 +52,23 @@ class LivrosController extends Controller
             'data_edicao'=>['nullable', 'date'],
             'isbn'=>['required', 'min:13', 'max:13'],
             'observacoes'=>['nullable', 'min:1', 'max:255'],
-            'imagem_capa'=>['nullable', 'min:1', 'max:255'],
+            'imagem_capa'=>['image', 'nullable', 'max:2000'],
             'id_genero'=>['nullable', 'numeric', 'min:10'],
             'sinopse'=>['nullable', 'min:1', 'max:255']
         ]);
+        if($request->hasFile('imagem_capa')){
+           $nomeimagem = $request->file('imagem_capa')->getClientOriginalName();
+           
+           $nomeimagem = time().'_'.$nomeimagem;
+           $guardarimagem = $request->file('imagem_capa')->storeAs('imagens/livros',$nomeimagem);
+           
+           $novolivro['imagem_capa']=$nomeimagem;
+       }
                    if(Auth::check()){
                $userAtual = Auth::user()->id;
                $novoLivro['id_user']=$userAtual;
            }
-        if (Gate::allows('admin')){
+        
         $autores = $request->id_autor;
         $editoras=$request->id_editora;
         $livro = Livro::create($novoLivro); 
@@ -69,7 +77,7 @@ class LivrosController extends Controller
         return redirect()->route('livros.show', [
             'id'=>$livro->id_livro
         ]);
-        }
+        
        
         
     }

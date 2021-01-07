@@ -1,4 +1,4 @@
-<form action="{{route('livros.store')}}" method="post">
+<form action="{{route('livros.store')}}" enctype="multipart/form-data" method="post">
 @csrf
 Titulo: <input type="text" name="titulo" value="{{old('titulo')}}"><br>
     @if ( $errors->has('titulo'))
@@ -24,7 +24,7 @@ Observações: <input type="text" name="observacoes" value="{{old('observacoes')
      @if ( $errors->has('observacoes'))
     devera indicar um observacoes correto<br>
     @endif
-Imagem capa: <input type="text" name="imagem_capa" value="{{old('imagem_capa')}}"><br>
+Imagem capa: <input type="file" name="imagem_capa" value="{{old('imagem_capa')}}"><br>
     <select name="id_genero">
         @foreach($generos as $genero)
             <option value="{{$genero->id_genero}}">{{$genero->designacao}}</option>
