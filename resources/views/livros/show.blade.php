@@ -55,5 +55,7 @@ Deleted_at:{{$livro->deleted_at}}
         </a>
     @endif
 @endif
-
+@if(isset($livro->imagem_capa))
+<img src="{{asset('imagens/livros/'.$livro->imagem_capa)}}">
+@endif
     

@@ -52,11 +52,17 @@ Sinopse: <input type="text" name="sinpse" value="{{old('sinopse')}}"><br>
     @if ( $errors->has('sinopse'))
     devera indicar um sinopse correto<br>
     @endif
-<input type="submit" value="enviar">
+
 Editora:
    <select name="id_editora[]" multiple="multiple">
         @foreach($editoras as $editora)
             <option value="{{$editora->id_editora}}">{{$editora->nome}}</option>
         @endforeach
     </select>
+pdf:
+    <input type="file" name="pdf" value="{{old('pdf')}}"><br>
+    @if ( $errors->has('pdf'))
+    devera indicar um pdf correto<br>
+    @endif
+<input type="submit" value="enviar">
 </form>

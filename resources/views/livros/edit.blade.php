@@ -64,5 +64,10 @@ Editora:
         @endforeach
     </select>   
     <br>
+pdf:
+    <input type="file" name="pdf" value="{{old('pdf')}}"><br>
+    @if ( $errors->has('pdf'))
+    devera indicar um pdf correto<br>
+    @endif
     <input type="submit" value="enviar">
 </form>

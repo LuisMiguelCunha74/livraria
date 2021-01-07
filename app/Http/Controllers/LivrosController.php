@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Livro;
 use App\Models\Genero;
 use App\Models\Autor;
@@ -54,7 +55,8 @@ class LivrosController extends Controller
             'observacoes'=>['nullable', 'min:1', 'max:255'],
             'imagem_capa'=>['image', 'nullable', 'max:2000'],
             'id_genero'=>['nullable', 'numeric', 'min:10'],
-            'sinopse'=>['nullable', 'min:1', 'max:255']
+            'sinopse'=>['nullable', 'min:1', 'max:255'],
+            'pdf'=>['file', 'nullable', 'max:2000','mimes:pdf']
         ]);
         if($request->hasFile('imagem_capa')){
            $nomeimagem = $request->file('imagem_capa')->getClientOriginalName();
@@ -62,7 +64,7 @@ class LivrosController extends Controller
            $nomeimagem = time().'_'.$nomeimagem;
            $guardarimagem = $request->file('imagem_capa')->storeAs('imagens/livros',$nomeimagem);
            
-           $novolivro['imagem_capa']=$nomeimagem;
+           $novoLivro['imagem_capa']=$nomeimagem;
        }
                    if(Auth::check()){
                $userAtual = Auth::user()->id;
@@ -118,6 +120,7 @@ class LivrosController extends Controller
     public function update (Request $request){
         $id = $request->id;
         $livro = Livro::findOrFail ($id);
+        $imagemAntiga = $livro->imagem_capa;
         // dd($request->all());
         $updateLivro = $request->validate([
             'titulo'=>['required', 'min:3', 'max:100'],
@@ -128,10 +131,33 @@ class LivrosController extends Controller
             'observacoes'=>['nullable', 'min:1', 'max:255'],
             'imagem_capa'=>['nullable', 'min:1', 'max:255'],
             'id_genero'=>['nullable', 'numeric'],
-            'sinopse'=>['nullable', 'min:1', 'max:255']
+            'sinopse'=>['nullable', 'min:1', 'max:255'],
+            'pdf'=>['file', 'nullable', 'max:2000','mimes:pdf']
         ]);
         // dd($updateLivro);
-        if (Gate::allows('admin')){
+        if($request->hasFile('imagem_capa')){
+           $nomeimagem = $request->file('imagem_capa')->getClientOriginalName();
+           
+           $nomeimagem = time().'_'.$nomeimagem;
+           $guardarimagem = $request->file('imagem_capa')->storeAs('imagens/livros',$nomeimagem);
+           
+           $updateLivro['pdf']=$nomeimagem;
+            if(!is_null($imagemAntiga)){
+            Storage::Delete('imagens/livros/'.$imagemAntiga);
+            }
+        }
+        if($request->hasFile('pdf')){
+           $nomeimagem = $request->file('pdf')->getClientOriginalName();
+           
+           $nomeimagem = time().'_'.$nomeimagem;
+           $guardarimagem = $request->file('pdf')->storeAs('imagens/livros',$nomeimagem);
+           
+           $updateLivro['pdf']=$nomeimagem;
+            if(!is_null($imagemAntiga)){
+            Storage::Delete('imagens/livros/'.$imagemAntiga);
+            }
+        }
+        //if (Gate::allows('admin')){
         $autores=$request->id_autor;
         $editoras=$request->id_editora;
         $livro->update($updateLivro);
@@ -140,7 +166,7 @@ class LivrosController extends Controller
         return redirect()->route('livros.show', [ 
         'id'=>$livro->id_livro
         ]);
-        }
+        //}
     }
         
     
